@@ -1,0 +1,42 @@
+/* Navbar.module.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+
+  }
+  
+  .buttonsContainer {
+    display: flex;
+    gap: 10px;
+  }
+  
+  
+  .signupButton {
+    width: 120px;
+    height: 45px;
+    background: #73ABFF;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .registerButton,
+  .bookmarksButton,
+  .addStoryButton {
+    width: 120px;
+    height: 45px;
+    background: #FF7373;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  
