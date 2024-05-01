@@ -46,16 +46,12 @@
 }
 
 .slide h3 {
-  position:sticky;
-
   margin: 0;
   font-weight: bold;
   font-size: 1.5rem; 
 }
 
 .slide p {
-  position:sticky;
-
   margin: 5px 0;
   font-size: medium;
 }

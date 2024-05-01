@@ -1,4 +1,3 @@
-// Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify'; 
@@ -25,8 +24,12 @@ const Register = ({ onClose }) => {
         password
       });
       console.log(response.data);
+      // Store token in local storage
+      localStorage.setItem('token', response.data.token);
       // Show success toast
       toast.success('Registration successful');
+      onClose();
+      window.location.reload();
     } catch (error) {
       console.error('Error:', error);
       // Show error toast

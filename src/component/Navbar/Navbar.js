@@ -1,37 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Register from '../Button/Register/Register';
 import styles from './Navbar.module.css';
 import SignupForm from '../Button/Signup/SignupForm';
+import AddStories from '../Button/AddStories/AddStories';
 
 const Navbar = () => {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isSignupFormOpen, setIsSignupFormOpen] = useState(false);
+  const [isAddStoriesOpen, setIsAddStoriesOpen] = useState(false); // State to manage Add Stories model visibility
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const openRegister = () => {
-    setIsRegisterOpen(true);
-  };
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
-  const closeRegister = () => {
+  const handleRegisterClose = () => {
     setIsRegisterOpen(false);
   };
 
-  const openSignupForm = () => {
-    setIsSignupFormOpen(true);
+  const handleSignupFormClose = () => {
+    setIsSignupFormOpen(false);
   };
 
-  const closeSignupForm = () => {
-    setIsSignupFormOpen(false);
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.reload();
+  };
+
+  const handleAddStoriesOpen = () => {
+    setIsAddStoriesOpen(true); // Open Add Stories model
   };
 
   return (
     <nav className={styles.navbar}>
       <h1>Swipe Tory</h1>
       <div className={styles.buttonsContainer}>
-        <button className={styles.registerButton} onClick={openRegister}>Register</button>
-        <button className={styles.signupButton} onClick={openSignupForm}>Signup</button>
+        {isLoggedIn ? (
+          <>
+            <button className={styles.bookmarksButton}>Bookmarks</button>
+            <button className={styles.addStoriesButton} onClick={handleAddStoriesOpen}>Add Stories</button> {/* Add onClick handler to open Add Stories */}
+            <button className={styles.logoutButton} onClick={handleLogout}>Logout</button>
+          </>
+        ) : (
+          <>
+            <button className={styles.registerButton} onClick={() => setIsRegisterOpen(true)}>Register</button>
+            <button className={styles.signupButton} onClick={() => setIsSignupFormOpen(true)}>Signup</button>
+          </>
+        )}
       </div>
-      {isRegisterOpen && <Register onClose={closeRegister} />}
-      {isSignupFormOpen && <SignupForm onClose={closeSignupForm} />}
+      {isRegisterOpen && <Register onClose={handleRegisterClose} />}
+      {isSignupFormOpen && <SignupForm onClose={handleSignupFormClose} />}
+      {isAddStoriesOpen && <AddStories onClose={() => setIsAddStoriesOpen(false)} />} {/* Render Add Stories component when isAddStoriesOpen is true */}
     </nav>
   );
 };

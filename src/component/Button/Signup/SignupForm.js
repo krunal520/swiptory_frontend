@@ -1,6 +1,7 @@
-// SignupForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import styles from './SignupForm.module.css';
 
 const SignupForm = ({ onClose }) => {
@@ -23,8 +24,14 @@ const SignupForm = ({ onClose }) => {
         password
       });
       console.log(response.data); // Handle response as needed
+      // Store token in local storage
+      localStorage.setItem('token', response.data.token);
+      onClose();
+      window.location.reload();
     } catch (error) {
       console.error('Error:', error);
+      // Show error toast
+      toast.error('Sign up failed');
     }
   };
 
